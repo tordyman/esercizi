@@ -1,0 +1,3 @@
+C:/Users/leona/Documents/clion/01c_Ruota_I/cmake-build-debug/CMakeFiles/ruota.dir
+C:/Users/leona/Documents/clion/01c_Ruota_I/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/leona/Documents/clion/01c_Ruota_I/cmake-build-debug/CMakeFiles/rebuild_cache.dir

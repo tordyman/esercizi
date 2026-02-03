@@ -2,6 +2,7 @@
 using namespace std;
 
 class Piramide {
+    friend ostream& operator<<(ostream& os, const Piramide& s);
     int dim;
     int *array;
     public:
@@ -11,7 +12,7 @@ class Piramide {
     Piramide& nuovovalore(int, int, int);
     int valore(int, int, int&)const;
     Piramide& specchia();
-    ~Piramide();
+    ~Piramide(){delete[] array;}
 };
 
 
@@ -64,16 +65,82 @@ int Piramide::valore(int m, int n, int &v) const {//modifica direttamente la var
 }
 
 Piramide &Piramide::specchia() {
-    for (int i;i<dim;i++) {
+    for (int i=0;i<dim;i++) {
         int m=i*(i+1)/2;
-        for (int j;j<(i+1)/2;j++) {
+        for (int j=0;j<(i+1)/2;j++) {
             int x= array[m+j];
             array[m+j]=array[m+i-j];
-            array[x +i-j]=x;
+            array[m +i-j]=x;
         }
     }
+    return *this;
+}
+
+ostream& operator<<(ostream& os, const Piramide& s)
+{
+    int v;
+    for (int i = 0; i < s.dim; i++) {
+        for (int j = 0; j <= i; j++) {
+            s.valore(i, j, v);
+            os << v;
+            if (j != i)
+                os << '\t';
+        }
+        os << '\n';
+    }
+    return os;
 }
 
 int main() {
+    cout << "=== TEST PIRAMIDE ===" << endl;
 
+    // 1. Creazione di una piramide di altezza 4
+    // La piramide avrà:
+    // Riga 0: 1 elemento
+    // Riga 1: 2 elementi
+    // Riga 2: 3 elementi
+    // Riga 3: 4 elementi
+    Piramide p(4);
+
+    // 2. Riempimento con valori
+    // Riempiamo in modo che sia facile vedere se specchia funziona.
+    // Esempio:
+    // 1
+    // 2 3
+    // 4 5 6
+    // 7 8 9 0
+    int contatore = 1;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j <= i; j++) {
+            // Uso % 10 per avere numeri a una cifra (0-9) per estetica
+            p.nuovovalore(i, j, contatore % 10);
+            contatore++;
+        }
+    }
+
+    // 3. Stampa originale
+    cout << "\nPiramide Originale:" << endl;
+    cout << p << endl;
+
+    // 4. Test Specchia
+    // Ci aspettiamo che le righe si invertano:
+    // "2 3" -> "3 2"
+    // "4 5 6" -> "6 5 4"
+    p.specchia();
+    cout << "Piramide Specchiata:" << endl;
+    cout << p << endl;
+
+    // 5. Test Copia e Assegnamento (Gestione memoria)
+    cout << "Test Copia (p2 copiata da p):" << endl;
+    Piramide p2 = p; // Costruttore di copia
+
+    // Modifico p2 per vedere se p1 rimane intatta
+    p2.nuovovalore(0, 0, 9);
+
+    cout << "P1 (Originale, cima invariata):" << endl;
+    cout << p;
+    cout << "P2 (Copia, cima modificata a 9):" << endl;
+    cout << p2;
+
+    return 0;
 }

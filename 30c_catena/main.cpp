@@ -33,4 +33,5 @@ void catena::inserisci(metallo v) {
 
 
 int main() {
+    cout<<"ciao"<<endl;
 }

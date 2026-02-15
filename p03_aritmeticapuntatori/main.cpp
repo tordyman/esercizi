@@ -18,4 +18,5 @@ int main() {
     int *p1 = &u[1], *p2 = &u[4];
     cout << p2 - p1 << '\n'; // 2 (elementi)
    //cout << long int(p2) - long int(p1) << '\n'; // 8 (byte)
+
 }

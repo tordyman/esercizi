@@ -23,7 +23,7 @@ public:
      int estrai(colore,int&);
      int operator[](colore);
      int operator%(colore);
-     int operator!();
+     int operator!() const;
      ~ListaColorata(){void elimina();}
 };
 
@@ -115,7 +115,7 @@ int ListaColorata::estrai(colore c,int& v) {
      return 1;
 }
 
-int ListaColorata::operator[](colore c) {
+int ListaColorata::operator[](colore c) const {
      elem *tmp=testa;
      int contval=0;
      while(tmp != NULL){
@@ -139,7 +139,7 @@ int ListaColorata::operator%(colore c) {
      return contcol;
 }
 
-int ListaColorata::operator!() {
+int ListaColorata::operator!() const {
      return num;
 }
 

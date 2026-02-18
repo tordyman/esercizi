@@ -40,7 +40,7 @@ catena::catena(const catena& s) {
         testa = new elem;         // 1. Creo il primo anello nuovo
         testa->val = s.testa->val;// 2. Copio il valore (es. ORO) dalla testa
         num++;                    // 3. Conto il primo anello
-        elem *tmp = testa;        //❓
+        elem *tmp = testa;        //tmp è un puntatore elem che punta a testa e lo useremo per modificare le cose
         elem *aux = s.testa->next; //secondo anello
         while (aux != NULL) {
             tmp->next = new elem; //Il Costruttore (tmp) guarda avanti (next) e crea un nuovo anello vuoto (new elem).
